@@ -8,6 +8,9 @@
 		height: var(--size);
 	}
 
+	&.xxs {
+		--size: var(--xxs);
+	}
 	&.xs {
 		--size: var(--xs);
 	}
@@ -22,5 +25,8 @@
 	}
 	&.xl {
 		--size: var(--xl);
+	}
+	&.xxl {
+		--size: var(--xxl);
 	}
 }

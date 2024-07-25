@@ -1,6 +1,20 @@
 const { Router } = require("express")
+const { displayDate } = require("../utils/dates")
 
 const indexRouter = Router()
+
+const messages = [
+	{
+		text: "Bonjour ici\u00a0!",
+		user: "Jacqueline",
+		added: new Date(),
+	},
+	{
+		text: "Allo le monde\u00a0?",
+		user: "Jean-Michel",
+		added: new Date(),
+	},
+]
 
 const routes = [
 	{
@@ -20,6 +34,7 @@ for (const route of routes) {
 		res.render(route.file, {
 			title: route.title,
 			links: routes,
+			messages: messages,
 		})
 	})
 }

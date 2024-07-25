@@ -1,19 +1,51 @@
 :root {
-	--primaryColor: oklch(from royalblue l c calc(h - 50));
-	--xs: 0.5rem;
-	--sm: 1rem;
+	--dark-col: oklch(from black 33% c h);
+	--primary-col: oklch(from royalblue l c calc(h - 50));
+	--light-col: rgb(from var(--dark-col) r g b / 6% );
+
+	--xxs: 0.5rem;
+	--xs: 1rem;
+	--sm: 2rem;
 	--md: 3rem;
 	--lg: 5rem;
-	--xl: 10rem;
+	--xl: 7.5rem;
+	--xxl: 10rem;
 
+	--text-xxs: 1rem;
+	--text-xs: 1.2rem;
+	--text-sm: 1.4rem;
+	--text-md: 1.8rem;
+	--text-lg: 2.4rem;
+	--text-xl: 3rem;
+	--text-xxl: 6rem;
+
+	--transition: 0.25s;
+	--transition-slow: 0.5s;
+	--transition-quick: 0.125s;
+	
+	font-size: 62.5%;
+	color: var(--dark-col);
 	font-family: sans-serif;
-	padding-block: var(--md);
-	padding-inline: var(--lg);
+	padding: var(--xl);
 	min-height: 100vh;
+	line-height: 1.5;
+}
+
+body {
+	font-size: var(--text-md);
 }
 
 h1 {
-	color: var(--primaryColor);
+	font-size: var(--text-xxl);
+	color: var(--primary-col);
+}
+
+h2 {
+	font-size: var(--text-xl);
+}
+
+h3 {
+	font-size: var(--text-lg);
 }
 
 h1, h2, h3, h4, h5, h6, p, ul {

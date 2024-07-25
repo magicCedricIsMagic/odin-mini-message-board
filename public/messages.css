@@ -1,0 +1,29 @@
+.messages {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: var(--md);
+	
+}
+
+.message {
+	padding: var(--md) var(--lg);
+	background-color: var(--light-col);
+	border-radius: var(--sm);
+	/* display: flex;
+	flex-direction: column;
+	gap: var(--xs); */
+
+	.user,
+	.date {
+		font-size: var(--text-sm);
+	}
+	/* .user{
+		margin-block-end: var(--xxs);
+	} */
+	.date {
+		margin-block-end: var(--sm);
+	}
+	.text {
+		font-size: var(--text-lg);
+	}
+}
