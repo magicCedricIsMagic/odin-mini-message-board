@@ -1,0 +1,10 @@
+<%
+	const newSize = (typeof size !== "undefined") 
+		? size : 
+		"md"
+	const newDirection = (typeof direction !== "undefined") 
+		? direction 
+		: "vertical"
+%>
+
+<div class="spacer <%= newSize %> <%= newDirection %>"></div>

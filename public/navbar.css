@@ -1,0 +1,10 @@
+.navbar {
+	ul {
+		display: flex;
+		gap: var(--md);
+		padding: unset;
+	}
+	li {
+		display: block;
+	}
+}
