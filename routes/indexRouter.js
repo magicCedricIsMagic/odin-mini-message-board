@@ -14,6 +14,31 @@ const messages = [
 		user: "Jean-Michel",
 		added: new Date(),
 	},
+	{
+		text: "Ta gueule Jean-Mich",
+		user: "Martine",
+		added: new Date(),
+	},
+	{
+		text: "Mais je n'ai presque rien dit !",
+		user: "Jean-Michel",
+		added: new Date(),
+	},
+	{
+		text: "Et moi j'ai dit ta gueule Jean-Mich",
+		user: "Martine",
+		added: new Date(),
+	},
+	{
+		text: "…",
+		user: "Jean-Michel",
+		added: new Date(),
+	},
+	{
+		text: "Ouais bah ta gueule toi-même Martoche, d'ailleurs t'es moche.\nTout le monde pense comme moi. Même que c'est vrai.",
+		user: "Anonyme",
+		added: new Date(),
+	},
 ]
 
 const routes = [
@@ -38,5 +63,14 @@ for (const route of routes) {
 		})
 	})
 }
+
+indexRouter.post("/new", (req, res) => {
+	messages.push({
+		text: req.body.text,
+		user: req.body.name,
+		added: new Date()
+	})
+	res.redirect("/")
+})
 
 module.exports = indexRouter

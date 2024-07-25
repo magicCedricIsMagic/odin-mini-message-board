@@ -1,0 +1,22 @@
+
+.button {
+	--btn-col: var(--primary-col);
+	--btn-col-hover: oklch(from var(--btn-col) calc(l * 0.75) calc(c * 1.25) h);
+	--text-col: white;
+	
+	color: var(--text-col);
+	background-color: var(--btn-col);
+	padding: var(--xs) var(--sm);
+	border-radius: var(--xs);
+	border: 1px solid var(--btn-col);
+	cursor: pointer;
+	outline: 3px solid transparent;
+	transition: var(--transition);
+	&:focus-visible,
+	&:hover {
+		background-color: var(--btn-col-hover);
+	}
+	&:focus-visible {
+		outline-color: rgb(from var(--btn-col-hover) r g b / 30%);
+	}
+}

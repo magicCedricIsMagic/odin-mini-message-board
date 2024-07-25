@@ -18,7 +18,7 @@
 			<article class="message">
 				<p class="user">Envoyé par <strong><%= message.user %></strong></p>
 				<p class="date">le <strong><%= displayDate(message.added) %></strong> à <strong><%= displayHour(message.added) %></strong></p>
-				<p class="text"><%= message.text %></p>
+				<p class="text"><%- message.text.replace("\n", "<br>") %></p>
 			</article>
 		<% } %>
 	</section>
