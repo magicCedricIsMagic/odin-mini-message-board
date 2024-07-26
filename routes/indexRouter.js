@@ -2,26 +2,7 @@ const { Router } = require("express")
 
 const indexRouter = Router()
 
-let messages = [
-	{
-		id: 1,
-		text: "Bonjour ici\u00a0!",
-		user: "Jacqueline",
-		added: new Date(),
-	},
-	{
-		id: 2,
-		text: "Allo le monde\u00a0?",
-		user: "Jean-Michel",
-		added: new Date(),
-	},
-	{
-		id: 3,
-		text: "Laisse-le tranquille Jean-Mich.",
-		user: "Martine",
-		added: new Date(),
-	},
-]
+const messagesController = require("../controllers/messagesController.js")
 
 const routes = [
 	{
@@ -38,47 +19,16 @@ const routes = [
 
 for (const route of routes) {
 	indexRouter.get(route.url, (req, res, next) => {
-		res.render(route.file, {
-			title: route.title,
-			links: routes,
-			messages: messages,
-		})
-		next()
+		messagesController.getAllMessages(req, res, next, routes, route)
 	})
 }
 
-class CustomNotFoundError extends Error {
-  constructor(message) {
-    super(message)
-    this.statusCode = 404
-    this.name = "NotFoundError"
-  }
-}
-
-indexRouter.get("/messages/:index", (req, res) => {
-	if (messages[req.params.index - 1]) {
-		res.render("message", {
-			title: `Message n°${req.params.index}\u00a0:`,
-			links: routes,
-			message: messages[req.params.index - 1],
-		})
-	}
-	else throw new CustomNotFoundError("Cette page n'existe pas")
+indexRouter.get("/messages/:index", (req, res, next) => {
+	messagesController.getMessageByIndex(req, res, next, routes)
 })
 
-indexRouter.post("/new", (req, res) => {
-	messages.push({
-		id: messages[messages.length - 1]?.id + 1 || 1,
-		text: req.body.text,
-		user: req.body.name,
-		added: new Date(),
-	})
-	res.redirect("/")
-})
+indexRouter.post("/new", messagesController.addNewMessage)
 
-indexRouter.post("/delete-message/:id", (req, res) => {
-	res.redirect("/")
-	messages = messages.filter((message) => message.id !== parseInt(req.params.id))
-})
+indexRouter.post("/delete-message/:id", messagesController.deleteMessage)
 
 module.exports = indexRouter
