@@ -1,5 +1,6 @@
 :root {
 	--col-primary: oklch(from royalblue l c calc(h - 30));
+	--col-danger: oklch(from var(--col-primary) l c 25);
 	--col-dark: oklch(from black 33% c h);
 	--col-gray: oklch(from var(--col-dark) calc(l * 2) c h );
 	--col-light: rgb(from var(--col-dark) r g b / 6.5% );

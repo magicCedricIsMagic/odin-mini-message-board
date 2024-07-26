@@ -9,7 +9,18 @@
 		<%- include("includes/spacer") %>
 		<h1><%= title %></h1>
 		<%- include("includes/spacer", { size: "sm" }) %>
-		<h2>Vous avez des messages&nbsp;:</h2>
+		<h2>
+			<% switch (messages.length) {
+				case 0:
+					%>Vous n'avez aucun message<%
+					break
+				case 1:
+					%>Vous avez un message&nbsp;:<%
+					break
+				default:
+					%>Vous avez des messages&nbsp;:<%
+			} %>
+		</h2>
 		<%- include("includes/spacer") %>
 		<section class="messages">
 			<% for (const [index, message] of messages.entries()) { %>

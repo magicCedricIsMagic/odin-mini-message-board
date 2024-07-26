@@ -2,40 +2,23 @@ const { Router } = require("express")
 
 const indexRouter = Router()
 
-const messages = [
+let messages = [
 	{
+		id: 1,
 		text: "Bonjour ici\u00a0!",
 		user: "Jacqueline",
 		added: new Date(),
 	},
 	{
+		id: 2,
 		text: "Allo le monde\u00a0?",
 		user: "Jean-Michel",
 		added: new Date(),
 	},
 	{
-		text: "Ta gueule Jean-Mich",
+		id: 3,
+		text: "Laisse-le tranquille Jean-Mich.",
 		user: "Martine",
-		added: new Date(),
-	},
-	{
-		text: "Mais je n'ai presque rien dit !",
-		user: "Jean-Michel",
-		added: new Date(),
-	},
-	{
-		text: "Et moi j'ai dit ta gueule Jean-Mich",
-		user: "Martine",
-		added: new Date(),
-	},
-	{
-		text: "…",
-		user: "Jean-Michel",
-		added: new Date(),
-	},
-	{
-		text: "Ouais bah ta gueule toi-même Martoche, d'ailleurs t'es moche.\nTout le monde pense comme moi. Même que c'est vrai.",
-		user: "Anonyme",
 		added: new Date(),
 	},
 ]
@@ -74,11 +57,17 @@ indexRouter.get("/messages/:index", (req, res) => {
 
 indexRouter.post("/new", (req, res) => {
 	messages.push({
+		id: messages[messages.length - 1]?.id + 1 || 1,
 		text: req.body.text,
 		user: req.body.name,
 		added: new Date(),
 	})
 	res.redirect("/")
+})
+
+indexRouter.post("/delete-message/:id", (req, res) => {
+	res.redirect("/")
+	messages = messages.filter((message) => message.id !== parseInt(req.params.id))
 })
 
 module.exports = indexRouter

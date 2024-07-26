@@ -15,8 +15,16 @@
 	&:focus-visible,
 	&:hover {
 		background-color: var(--btn-col-hover);
+		border-color: var(--btn-col-hover);
 	}
 	&:focus-visible {
 		outline-color: rgb(from var(--btn-col-hover) r g b / 30%);
+	}
+	&.danger {
+		--btn-col: var(--col-danger);
+	}
+	&.sm {
+		font-size: var(--text-sm);
+		padding: var(--xxs) var(--xs);
 	}
 }

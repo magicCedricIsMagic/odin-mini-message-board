@@ -16,6 +16,10 @@
 				<strong><%= displayHour(message.added) %></strong>
 			</p>
 			<p class="text"><%- message.text.replace("\n", "<br />") %></p>
+			<%- include("includes/spacer") %>
+			<form method="POST" action="/delete-message/<%= message.id %>">
+				<input type="submit" class="button sm danger" value="Supprimer le message" />
+			</form>
 		</article>
 	</body>
 </html>
