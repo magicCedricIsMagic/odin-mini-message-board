@@ -2,6 +2,10 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 	gap: var(--md);
+
+	@media (width < 600px) {
+		grid-template-columns: 1fr;
+	}
 }
 
 .message {
@@ -46,5 +50,9 @@
 			background-color: color-mix(in srgb, var(--col-light) 90%, var(--col-primary));
 			transition: var(--transition-quick);
 		}
+	}
+
+	@media (width < 600px) {
+		padding-inline: var(--md);
 	}
 }

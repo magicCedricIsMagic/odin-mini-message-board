@@ -11,6 +11,10 @@
 	.button {
 		margin-block-start: var(--xs);
 	}
+	
+	@media (width < 600px) {
+		padding-inline: var(--md);
+	}
 }
 
 .form-field {
