@@ -40,13 +40,28 @@
 		.text {
 			font-size: var(--text-xl);
 		}
+
+		@media (width < 600px) {
+			padding-inline: var(--lg);
+		}
+		@media (width < 400px) {
+			padding-inline: var(--md);
+		}
 	}
 	
 	&:is(a[href]) {
 		cursor: pointer;
 		transition: var(--transition);
-		&:hover {
-			color: color-mix(in srgb, var(--col-dark), var(--col-primary));
+		outline: 4px solid transparent;
+		outline-offset: 0;
+
+		&:focus-visible {
+			outline-color: rgb(from color-mix(in srgb, var(--col-light) 90%, var(--col-primary)) r g b / 7.5%);
+		}
+
+		&:hover,
+		&:focus-visible {
+			color: color-mix(in srgb, var(--col-dark) 40%, var(--col-primary));
 			background-color: color-mix(in srgb, var(--col-light) 90%, var(--col-primary));
 			transition: var(--transition-quick);
 		}

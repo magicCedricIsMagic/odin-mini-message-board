@@ -13,8 +13,15 @@
 		}
 		&[href] {
 			color: var(--col-primary);
+			outline: 3px solid transparent;
+			border-radius: var(--xxs);
+			transition: var(--transition);
+
 			&:hover {
 				text-decoration: underline;
+			}
+			&:focus-visible {
+				outline-color: rgb(from var(--col-primary) r g b / 20%);
 			}
 		}
 	}

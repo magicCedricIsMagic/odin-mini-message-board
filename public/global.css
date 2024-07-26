@@ -21,6 +21,8 @@
 	--text-xl: 3rem;
 	--text-xxl: 6rem;
 
+	--screen-width-xs: 600px;
+
 	--transition: 0.25s;
 	--transition-slow: 0.5s;
 	--transition-quick: 0.125s;
