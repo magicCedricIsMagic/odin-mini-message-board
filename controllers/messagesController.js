@@ -1,5 +1,5 @@
-
-
+const { body, validationResult } = require("express-validator");
+const { sanitize } = require("../utils/texts")
 class CustomNotFoundError extends Error {
 	constructor(message) {
 		super(message)
@@ -50,15 +50,35 @@ const getMessageByIndex = (req, res, next, routes) => {
 	})
 }
 
-const addNewMessage = (req, res) => {
-	messages.push({
-		id: messages[messages.length - 1]?.id + 1 || 1,
-		text: req.body.text,
-		user: req.body.name,
-		added: new Date(),
-	})
-	res.redirect("/")
-}
+const validateMessage = [
+	body("name")
+		.isLength({ min: 1, max: 20 }).withMessage(`Name must be between 1 and 20 characters`),
+  body("text")
+    .isLength({ min: 3, max: 100 }).withMessage(`Text must be between 3 and 100 characters`),
+]
+
+const addNewMessage = [
+  validateMessage,
+  (req, res) => {
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			let errorsStringArray = []
+			for (const error of errors.errors) {
+				errorsStringArray.push(error.msg)
+			}
+			throw new CustomNotFoundError(`Oups, erreur de formumaire\u00a0: ${errorsStringArray.join(' | ')}`)
+		}
+		else {
+			messages.push({
+				id: messages[messages.length - 1]?.id + 1 || 1,
+				text: sanitize(req.body.text),
+				user: sanitize(req.body.name),
+				added: new Date(),
+			})
+			res.redirect("/")
+		}
+  }
+]
 
 const deleteMessage = (req, res) => {
 	res.redirect("/")
