@@ -1,5 +1,4 @@
 const { Router } = require("express")
-const { displayDate } = require("../utils/dates")
 
 const indexRouter = Router()
 
@@ -55,20 +54,29 @@ const routes = [
 ]
 
 for (const route of routes) {
-	indexRouter.get(route.url, (req, res) => {
+	indexRouter.get(route.url, (req, res, next) => {
 		res.render(route.file, {
 			title: route.title,
 			links: routes,
 			messages: messages,
 		})
+		next()
 	})
 }
+
+indexRouter.get("/messages/:index", (req, res) => {
+	res.render("message", {
+		title: `Message n°${req.params.index}\u00a0:`,
+		links: routes,
+		message: messages[req.params.index - 1],
+	})
+})
 
 indexRouter.post("/new", (req, res) => {
 	messages.push({
 		text: req.body.text,
 		user: req.body.name,
-		added: new Date()
+		added: new Date(),
 	})
 	res.redirect("/")
 })

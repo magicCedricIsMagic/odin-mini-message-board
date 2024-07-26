@@ -4,7 +4,7 @@
 	gap: var(--md);
 	max-width: 60ch;
 	/* margin-inline: auto; */
-	background-color: var(--light-col);
+	background-color: var(--col-light);
 	padding: var(--lg);
 	border-radius: var(--md);
 
@@ -26,10 +26,10 @@
 .form-field__input {
 	padding: var(--xs) var(--sm);
 	border-radius: var(--xs);
-	border: 1px solid rgb(from var(--dark-col) r g b / 20%);
+	border: 1px solid rgb(from var(--col-dark) r g b / 20%);
 	outline: 3px solid transparent;
 	transition: var(--transition);
 	&:focus-visible {
-		outline-color: rgb(from var(--dark-col) r g b / 10%);
+		outline-color: rgb(from var(--col-dark) r g b / 10%);
 	}
 }

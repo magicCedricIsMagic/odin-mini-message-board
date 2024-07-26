@@ -7,4 +7,15 @@
 	li {
 		display: block;
 	}
+	a {
+		&:not([href]) {
+			color: var(--col-gray);
+		}
+		&[href] {
+			color: var(--col-primary);
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }

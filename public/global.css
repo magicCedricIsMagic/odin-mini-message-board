@@ -1,7 +1,8 @@
 :root {
-	--dark-col: oklch(from black 33% c h);
-	--primary-col: oklch(from royalblue l c calc(h - 50));
-	--light-col: rgb(from var(--dark-col) r g b / 6% );
+	--col-primary: oklch(from royalblue l c calc(h - 30));
+	--col-dark: oklch(from black 33% c h);
+	--col-gray: oklch(from var(--col-dark) calc(l * 2) c h );
+	--col-light: rgb(from var(--col-dark) r g b / 6.5% );
 
 	--xxs: 0.5rem;
 	--xs: 1rem;
@@ -24,7 +25,7 @@
 	--transition-quick: 0.125s;
 	
 	font-size: 62.5%;
-	color: var(--dark-col);
+	color: var(--col-dark);
 	font-family: sans-serif;
 	padding: var(--xl);
 	min-height: 100vh;
@@ -37,7 +38,7 @@ body {
 
 h1 {
 	font-size: var(--text-xxl);
-	color: var(--primary-col);
+	color: var(--col-primary);
 }
 
 h2 {
@@ -50,4 +51,9 @@ h3 {
 
 h1, h2, h3, h4, h5, h6, p, ul {
 	margin: unset;
+}
+
+a {
+	color: unset;
+	text-decoration: unset;
 }

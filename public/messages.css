@@ -2,28 +2,49 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 	gap: var(--md);
-	
 }
 
 .message {
 	padding: var(--md) var(--lg);
-	background-color: var(--light-col);
+	background-color: var(--col-light);
 	border-radius: var(--sm);
-	/* display: flex;
-	flex-direction: column;
-	gap: var(--xs); */
-
+	
 	.user,
 	.date {
 		font-size: var(--text-sm);
 	}
-	/* .user{
-		margin-block-end: var(--xxs);
-	} */
+	
 	.date {
 		margin-block-end: var(--sm);
 	}
+
 	.text {
 		font-size: var(--text-lg);
+	}
+	
+	&.big {
+		padding: var(--lg) var(--xl);
+		border-radius: var(--md);
+		max-width: 50rem;
+		.user,
+		.date {
+			font-size: var(--text-md);
+		}
+		.date {
+			margin-block-end: var(--md);
+		}
+		.text {
+			font-size: var(--text-xl);
+		}
+	}
+	
+	&:is(a[href]) {
+		cursor: pointer;
+		transition: var(--transition);
+		&:hover {
+			color: color-mix(in srgb, var(--col-dark), var(--col-primary));
+			background-color: color-mix(in srgb, var(--col-light) 90%, var(--col-primary));
+			transition: var(--transition-quick);
+		}
 	}
 }

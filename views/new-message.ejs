@@ -4,9 +4,10 @@
 		<%- include("includes/headContent") %>
 	</head>
 	<body>
-		<%- include("includes/navbar") %> <%- include("includes/spacer") %>
+		<%- include("includes/navbar") %>
+		<%- include("includes/spacer") %>
 		<h1><%= title %></h1>
-		<%- include("includes/spacer", { size: "sm" }) %>
+		<%- include("includes/spacer") %>
 		<form class="form" method="POST" action="/new">
 			<label class="form-field">
 				<span class="form-field__label">Votre nom</span>

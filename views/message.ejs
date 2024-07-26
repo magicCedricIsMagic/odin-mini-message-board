@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<%- include("includes/headContent") %>
+		<link rel="stylesheet" href="/messages.css" />
+	</head>
+	<body>
+		<%- include("includes/navbar") %>
+		<%- include("includes/spacer") %>
+		<h1><%= title %></h1>
+		<%- include("includes/spacer") %>
+		<article class="message big">
+			<p class="user">Envoyé par <strong><%= message.user %></strong></p>
+			<p class="date">
+				le <strong><%= displayDate(message.added) %></strong> à
+				<strong><%= displayHour(message.added) %></strong>
+			</p>
+			<p class="text"><%- message.text.replace("\n", "<br />") %></p>
+		</article>
+	</body>
+</html>
