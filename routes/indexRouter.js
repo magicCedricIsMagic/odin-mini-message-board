@@ -47,12 +47,23 @@ for (const route of routes) {
 	})
 }
 
+class CustomNotFoundError extends Error {
+  constructor(message) {
+    super(message)
+    this.statusCode = 404
+    this.name = "NotFoundError"
+  }
+}
+
 indexRouter.get("/messages/:index", (req, res) => {
-	res.render("message", {
-		title: `Message n°${req.params.index}\u00a0:`,
-		links: routes,
-		message: messages[req.params.index - 1],
-	})
+	if (messages[req.params.index - 1]) {
+		res.render("message", {
+			title: `Message n°${req.params.index}\u00a0:`,
+			links: routes,
+			message: messages[req.params.index - 1],
+		})
+	}
+	else throw new CustomNotFoundError("Cette page n'existe pas")
 })
 
 indexRouter.post("/new", (req, res) => {

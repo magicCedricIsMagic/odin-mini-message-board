@@ -18,7 +18,7 @@
 			<p class="text"><%- message.text.replace("\n", "<br />") %></p>
 			<%- include("includes/spacer") %>
 			<form method="POST" action="/delete-message/<%= message.id %>">
-				<input type="submit" class="button sm danger" value="Supprimer le message" />
+				<button type="submit" class="button sm danger">Supprimer le message</button>
 			</form>
 		</article>
 	</body>
