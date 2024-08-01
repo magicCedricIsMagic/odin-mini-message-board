@@ -68,3 +68,73 @@ a {
 	color: unset;
 	text-decoration: unset;
 }
+
+.flex {
+	display: flex;
+	gap: var(--md);
+	&.wrap {
+		flex-wrap: wrap;
+	}
+	&.row {
+		flex-direction: row;
+	}
+	&.column {
+		flex-direction: column;
+	}
+}
+
+.gap-0 {
+	gap: 0;
+}
+.gap-xxs {
+	gap: var(--xxs);
+}
+.gap-xs {
+	gap: var(--xs);
+}
+.gap-sm {
+	gap: var(--sm);
+}
+.gap-md {
+	gap: var(--md);
+}
+.gap-lg {
+	gap: var(--lg);
+}
+.gap-xl {
+	gap: var(--xl);
+}
+.gap-xxl {
+	gap: var(--xxl);
+}
+
+&.justify-start {
+	justify-content: start
+}
+&.justify-center {
+	justify-content: center
+}
+&.justify-end {
+	justify-content: end
+}
+&.justify-around {
+	justify-content: space-around
+}
+&.justify-between {
+	justify-content: space-between
+}
+&.justify-evenly {
+	justify-content: space-evenly
+}
+&.justify-end {
+	justify-content: end
+}
+&.align-start {
+	align-items: start
+}
+&.align-center {
+	align-items: center
+}
+&.align-end {
+	align-items: end
+}

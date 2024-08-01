@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<%- include("includes/headContent") %>
+	</head>
+	<body>
+		<%- include("includes/navbar") %>
+		<%- include("includes/spacer") %>
+		<h1><%= title %></h1>
+		<%- include("includes/spacer", { size: "sm" }) %>
+		<h2><%= errorName %>&nbsp;</h2>
+		<%- include("includes/spacer", { size: "sm" }) %>
+		<p><%= errorMessage %></p>
+		<%- include("includes/spacer") %>
+		<div class="flex wrap gap-sm">
+			<button
+				onclick="history.back()"
+				class="button primary"
+			>
+				Page précédente
+			</button>
+			<a href="/" class="button primary">Retour à la maison</a>
+		</div>
+	</body>
+</html>

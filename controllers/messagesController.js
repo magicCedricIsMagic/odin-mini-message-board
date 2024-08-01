@@ -1,10 +1,10 @@
 const { body, validationResult } = require("express-validator");
 const { sanitize } = require("../utils/texts")
-class CustomNotFoundError extends Error {
-	constructor(message) {
+class CustomError extends Error {
+	constructor(title, message, statusCode) {
 		super(message)
-		this.statusCode = 404
-		this.name = "NotFoundError"
+		this.name = title || "Error"
+		this.statusCode = statusCode || 404
 	}
 }
 
@@ -29,19 +29,36 @@ let messages = [
 	},
 ]
 
-const getAllMessages = (req, res, next, routes, route) => {	
+const getView = (req, res, next, routes, route) => {		
 	res.render(route.file, {
 		title: route.title,
 		links: routes,
-		messages: messages,
 	})
+	next()
+}
+
+const getAllMessages = (req, res, next, routes, route) => {	
+	// if (fs.exists('./views/' + route.file + ".ejs") == true) {		
+		res.render(route.file, {
+			title: route.title,
+			links: routes,
+			messages: messages,
+		})
+	// }
+	// else throw new CustomError(
+	// 	"Page non trouvée",
+	// 	"Cette page n'existe pas."
+	// )
 	next()
 }
 
 const getMessageByIndex = (req, res, next, routes) => {
 	const messageIndex = messages[req.params.index - 1]
 
-	if (!messageIndex) throw new CustomNotFoundError("Cette page n'existe pas")
+	if (!messageIndex) throw new CustomError(
+		"Page non trouvée",
+		"Cette page n'existe pas."
+	)
 
 	res.render("message", {
 		title: `Message n°${req.params.index}\u00a0:`,
@@ -66,7 +83,11 @@ const addNewMessage = [
 			for (const error of errors.errors) {
 				errorsStringArray.push(error.msg)
 			}
-			throw new CustomNotFoundError(`Oups, erreur de formumaire\u00a0: ${errorsStringArray.join(' | ')}`)
+			throw new CustomError(
+				"Erreur de formulaire",
+				errorsStringArray.join(' | '),
+				400
+			)
 		}
 		else {
 			messages.push({
@@ -87,4 +108,4 @@ const deleteMessage = (req, res) => {
 	)
 }
 
-module.exports = { messages, getAllMessages, getMessageByIndex, addNewMessage, deleteMessage }
+module.exports = { messages, getView, getAllMessages, getMessageByIndex, addNewMessage, deleteMessage }
