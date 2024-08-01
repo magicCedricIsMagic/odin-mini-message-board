@@ -8,10 +8,18 @@
 		<%- include("includes/spacer") %>
 		<h1><%= title %></h1>
 		<%- include("includes/spacer") %>
-		<form class="form" method="POST" action="/new">
+		<form
+			class="form"
+			method="POST"
+			action="<% if (message) { %>
+				/edit-message/<%= message.id %>
+			<% } else { %>
+				/new
+			<% } %>"
+		>
 			<label class="form-field">
 				<span class="form-field__label">Votre nom</span>
-				<input name="name" required class="form-field__input" />
+				<input name="name" required class="form-field__input" value="<%= message?.user %>" />
 			</label>
 			<label class="form-field">
 				<span class="form-field__label">Votre texte</span>
@@ -20,7 +28,7 @@
 					required
 					class="form-field__input"
 					rows="5"
-				></textarea>
+				><%= message?.text %></textarea>
 			</label>
 			<input class="button" type="submit" value="Envoyer" />
 		</form>

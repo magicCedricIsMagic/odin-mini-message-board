@@ -1,9 +1,9 @@
 :root {
 	--col-primary: oklch(from royalblue l c calc(h - 30));
 	--col-danger: oklch(from var(--col-primary) l c 25);
-	--col-dark: oklch(from black 33% c h);
-	--col-gray: oklch(from var(--col-dark) calc(l * 2) c h );
-	--col-light: rgb(from var(--col-dark) r g b / 6.5% );
+	--col-dark: oklch(from var(--col-primary) 30% 15% h);
+	--col-gray: color-mix(in srgb, var(--col-dark), white);
+	--col-light: color-mix(in srgb, var(--col-dark) 7.5%, white);
 
 	--xxs: 0.5rem;
 	--xs: 1rem;
@@ -108,33 +108,33 @@ a {
 	gap: var(--xxl);
 }
 
-&.justify-start {
-	justify-content: start
+.justify-start {
+	justify-content: start;
 }
-&.justify-center {
-	justify-content: center
+.justify-center {
+	justify-content: center;
 }
-&.justify-end {
-	justify-content: end
+.justify-end {
+	justify-content: end;
 }
-&.justify-around {
-	justify-content: space-around
+.justify-around {
+	justify-content: space-around;
 }
-&.justify-between {
-	justify-content: space-between
+.justify-between {
+	justify-content: space-between;
 }
-&.justify-evenly {
-	justify-content: space-evenly
+.justify-evenly {
+	justify-content: space-evenly;
 }
-&.justify-end {
-	justify-content: end
+.justify-end {
+	justify-content: end;
 }
 &.align-start {
-	align-items: start
+	align-items: start;
 }
 &.align-center {
-	align-items: center
+	align-items: center;
 }
 &.align-end {
-	align-items: end
+	align-items: end;
 }

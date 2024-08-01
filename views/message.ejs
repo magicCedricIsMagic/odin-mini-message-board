@@ -16,10 +16,13 @@
 				<strong><%= displayHour(message.added) %></strong>
 			</p>
 			<p class="text"><%= message.text %></p>
-			<%- include("includes/spacer") %>
-			<form method="POST" action="/delete-message/<%= message.id %>">
-				<button type="submit" class="button sm danger">Supprimer le message</button>
-			</form>
+			<%- include("includes/spacer", { size: "lg" }) %>
+			<div class="flex wrap gap-sm">
+				<a href="/edit-message/<%= message.id %>" class="button primary">Modifier</a>
+				<form method="POST" action="/delete-message/<%= message.id %>">
+					<button type="submit" class="button danger">Supprimer</button>
+				</form>
+			</div>
 		</article>
 	</body>
 </html>

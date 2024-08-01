@@ -4,6 +4,10 @@
 	--btn-col-hover: oklch(from var(--btn-col) calc(l * 0.75) calc(c * 1.25) h);
 	--text-col: white;
 	
+	display: block;
+	line-height: var(--line-height);
+	width: fit-content;
+
 	color: var(--text-col);
 	background-color: var(--btn-col);
 	padding: var(--xs) var(--sm);

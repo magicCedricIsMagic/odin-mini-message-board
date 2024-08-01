@@ -1,12 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const { sanitize } = require("../utils/texts")
-class CustomError extends Error {
-	constructor(title, message, statusCode) {
-		super(message)
-		this.name = title || "Error"
-		this.statusCode = statusCode || 404
-	}
-}
+const CustomError = require("../utils/CustomError")
 
 let messages = [
 	{
@@ -34,22 +28,30 @@ const getView = (req, res, next, routes, route) => {
 		title: route.title,
 		links: routes,
 	})
-	next()
 }
 
 const getAllMessages = (req, res, next, routes, route) => {	
-	// if (fs.exists('./views/' + route.file + ".ejs") == true) {		
-		res.render(route.file, {
-			title: route.title,
-			links: routes,
-			messages: messages,
-		})
-	// }
-	// else throw new CustomError(
-	// 	"Page non trouvée",
-	// 	"Cette page n'existe pas."
-	// )
-	next()
+	res.render(route.file, {
+		title: route.title,
+		links: routes,
+		messages: messages,
+	})
+}
+
+const getNewMessageView = (req, res, next, routes, route) => {
+	res.render("new-message", {
+		title: route.title,
+		links: routes,
+		message: false
+	})
+}
+const getEditMessageView = (req, res, next, routes) => {
+	res.render("new-message", {
+		title: "Modifier le message",
+		links: routes,
+		message: messages.find((msg) => msg.id === parseInt(req.params.id)),
+		messages: messages,
+	})
 }
 
 const getMessageByIndex = (req, res, next, routes) => {
@@ -76,7 +78,7 @@ const validateMessage = [
 
 const addNewMessage = [
   validateMessage,
-  (req, res) => {
+  (req, res, next) => {
 		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
 			let errorsStringArray = []
@@ -90,22 +92,46 @@ const addNewMessage = [
 			)
 		}
 		else {
-			messages.push({
-				id: messages[messages.length - 1]?.id + 1 || 1,
-				text: sanitize(req.body.text),
-				user: sanitize(req.body.name),
-				added: new Date(),
-			})
+			const postId = parseInt(req.params.id)
+			if (postId) {
+				messages = messages.map((message) => {
+					if (message.id === postId) {
+						return {
+							...message,
+							text: sanitize(req.body.text),
+							user: sanitize(req.body.name),
+						}
+					}
+					else return message
+				})
+			}
+			else {
+				messages.push({
+					id: messages[messages.length - 1]?.id + 1 || 1,
+					text: sanitize(req.body.text),
+					user: sanitize(req.body.name),
+					added: new Date(),
+				})
+			}
 			res.redirect("/")
 		}
   }
 ]
 
-const deleteMessage = (req, res) => {
+const deleteMessage = (req, res, next) => {
 	res.redirect("/")
 	messages = messages.filter(
 		(message) => message.id !== parseInt(req.params.id),
 	)
+	next()
 }
 
-module.exports = { messages, getView, getAllMessages, getMessageByIndex, addNewMessage, deleteMessage }
+const getErrorView = (err, req, res, next, routes) => {
+	res.render("error", {
+		title: `Erreur ${err.statusCode}`,
+		links: routes,
+		error: err,
+	})
+}
+
+module.exports = { messages, getView, getAllMessages, getMessageByIndex, getNewMessageView, getEditMessageView, addNewMessage, deleteMessage, getErrorView }
