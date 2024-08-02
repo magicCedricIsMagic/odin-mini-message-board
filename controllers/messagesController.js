@@ -7,23 +7,23 @@ let messages = [
 		id: 1,
 		text: "Bonjour ici\u00a0!",
 		user: "Jacqueline",
-		added: new Date(),
+		added: new Date().addHours(-1).addMinutes(-2),
 	},
 	{
 		id: 2,
 		text: "Allo le monde\u00a0?",
 		user: "Jean-Michel",
-		added: new Date(),
+		added: new Date().addMinutes(-31),
 	},
 	{
 		id: 3,
-		text: "Laisse-le tranquille Jean-Mich.",
-		user: "Martine",
+		text: "Oui ?",
+		user: "Le monde",
 		added: new Date(),
 	},
 ]
 
-const getView = (req, res, next, params) => {		
+const getView = (req, res, next, params) => {
 	res.render(params.route.file, {
 		title: params.route.title,
 		links: params.routes,
@@ -31,7 +31,7 @@ const getView = (req, res, next, params) => {
 	})
 }
 
-const getAllMessages = (req, res, next, params) => {	
+const getAllMessages = (req, res, next, params) => {
 	res.render(params.route.file, {
 		title: params.route.title,
 		links: params.routes,
@@ -77,13 +77,13 @@ const getMessageByIndex = (req, res, next, params) => {
 const validateMessage = [
 	body("name")
 		.isLength({ min: 1, max: 30 }).withMessage(`Nom doit être entre 1 et 30 caractères`),
-  body("text")
-    .isLength({ min: 3, max: 300 }).withMessage(`Texte doit être entre 1 et 300 caractères`),
+	body("text")
+		.isLength({ min: 3, max: 300 }).withMessage(`Texte doit être entre 1 et 300 caractères`),
 ]
 
 const addNewMessage = [
-  validateMessage,
-  (req, res, next) => {
+	validateMessage,
+	(req, res, next) => {
 		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
 			let errorsStringArray = []
@@ -120,7 +120,7 @@ const addNewMessage = [
 			}
 			res.redirect("/")
 		}
-  }
+	}
 ]
 
 const deleteMessage = (req, res, next) => {

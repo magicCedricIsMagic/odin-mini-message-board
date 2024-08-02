@@ -62,8 +62,9 @@ indexRouter.get("/param", (req, res, next) => {
 	messagesController.getView(req, res, next, { routes, route: routes[2], cookieHue })
 })
 
-indexRouter.post("/change-hue", (req, res, next) => {
+indexRouter.post("/change-hue", (req, res) => {
 	console.log("req.body", req.body)
+  res.json({ hueSuccess: true })
 })
 
 indexRouter.get("/*", (req, res, next) => {
