@@ -1,9 +1,10 @@
 :root {
 	/* --col-primary: oklch(55% 55% 230); */
-	--col-danger: oklch(
+	/* --col-danger: oklch(
 		from var(--col-interactive) 
 		l c calc(clamp(20, h - 180, 40))
-	);
+	); */
+	/* --col-danger: oklch(from var(--col-interactive) l c 25); */
 	
 	--col-dark: oklch(from var(--col-primary) 35% 15% h);
 	--col-gray: color-mix(in srgb, var(--col-dark) 40%, white);

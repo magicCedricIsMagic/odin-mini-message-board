@@ -14,8 +14,22 @@
 <link rel="stylesheet" href="/navbar.css">
 
 
+<%
+	let dangerHue
+	if (cookieHue >= 360 || cookieHue < 30) { // rouges-roses
+		dangerHue = 60
+	}
+	else if (cookieHue < 60) { // rouges-oranges
+		dangerHue = 0
+	}
+	else {
+		dangerHue = 25
+	}
+%>
 <style>
+
 	:root {
-		--col-primary: oklch(45% 45% <%= cookieHueValue %>);
+		--col-primary: oklch(45% 45% <%= cookieHue %>);
+		--col-danger: oklch(55% 55% <%= dangerHue %>);
 	}
 </style>

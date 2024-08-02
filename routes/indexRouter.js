@@ -23,43 +23,43 @@ const routes = [
 	},
 ]
 
-let cookieHueValue = 230
+let cookieHue = 230
 
 indexRouter.get("/*", (req, res, next) => {
 	const cookies = req.headers.cookie
 	if (cookies) {
-		const newCookieHueValue = cookies
+		const newCookieHue = cookies
 			.split("; ")
 			.find((row) => row.startsWith("hue="))
 			?.split("=")[1]
-		if (!!newCookieHueValue) cookieHueValue = newCookieHueValue
+		if (!!newCookieHue) cookieHue = newCookieHue
 	}
 	next()
 })
 
 indexRouter.get("/", (req, res, next) => {
-	messagesController.getAllMessages(req, res, next, { routes, route: routes[0], cookieHueValue })
+	messagesController.getAllMessages(req, res, next, { routes, route: routes[0], cookieHue })
 })
 
 indexRouter.get("/new", (req, res, next) => {
-	messagesController.getNewMessageView(req, res, next, { routes, route: routes[1], cookieHueValue })
+	messagesController.getNewMessageView(req, res, next, { routes, route: routes[1], cookieHue })
 })
 indexRouter.post("/new", messagesController.addNewMessage)
 
 indexRouter.get("/messages/:index", (req, res, next) => {
-	messagesController.getMessageByIndex(req, res, next, { routes, cookieHueValue })
+	messagesController.getMessageByIndex(req, res, next, { routes, cookieHue })
 })
 
 
 indexRouter.get("/edit-message/:id", (req, res, next) => {
-	messagesController.getEditMessageView(req, res, next, { routes, cookieHueValue })
+	messagesController.getEditMessageView(req, res, next, { routes, cookieHue })
 })
 indexRouter.post("/edit-message/:id", messagesController.addNewMessage)
 
 indexRouter.post("/delete-message/:id", messagesController.deleteMessage)
 
 indexRouter.get("/parametres", (req, res, next) => {
-	messagesController.getView(req, res, next, { routes, route: routes[2], cookieHueValue })
+	messagesController.getView(req, res, next, { routes, route: routes[2], cookieHue })
 })
 
 indexRouter.post("/change-hue", (req, res, next) => {
@@ -73,6 +73,6 @@ indexRouter.get("/*", (req, res, next) => {
 	)
 })
 
-indexRouter.use((err, req, res, next) => messagesController.getErrorView(err, req, res, next, { routes, cookieHueValue }))
+indexRouter.use((err, req, res, next) => messagesController.getErrorView(err, req, res, next, { routes, cookieHue }))
 
 module.exports = indexRouter
