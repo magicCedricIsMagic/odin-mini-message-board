@@ -17,9 +17,9 @@ const routes = [
 		title: "Nouveau message",
 	},
 	{
-		url: "/parametres",
+		url: "/param",
 		file: "param",
-		title: "Paramètres",
+		title: "Paramètre",
 	},
 ]
 
@@ -58,7 +58,7 @@ indexRouter.post("/edit-message/:id", messagesController.addNewMessage)
 
 indexRouter.post("/delete-message/:id", messagesController.deleteMessage)
 
-indexRouter.get("/parametres", (req, res, next) => {
+indexRouter.get("/param", (req, res, next) => {
 	messagesController.getView(req, res, next, { routes, route: routes[2], cookieHue })
 })
 
