@@ -62,6 +62,10 @@ indexRouter.get("/parametres", (req, res, next) => {
 	messagesController.getView(req, res, next, { routes, route: routes[2], cookieHueValue })
 })
 
+indexRouter.post("/change-hue", (req, res, next) => {
+	console.log("req.body", req.body)
+})
+
 indexRouter.get("/*", (req, res, next) => {
 	throw new CustomError(
 		"Page non trouvée",

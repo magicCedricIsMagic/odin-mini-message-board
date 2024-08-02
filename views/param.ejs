@@ -5,7 +5,6 @@
 	</head>
 	<body>
 		<%- include("includes/navbar") %>
-		<%- include("includes/spacer") %>
 		<h1><%= title %></h1>
 		<%- include("includes/spacer", { size: "md" }) %>
 
@@ -21,33 +20,30 @@
 					min="0" 
 					max="360"
 					step="10" 
-					oninput="handleChange()"
+					onchange="handleChange()"
+					oninput="handleInput()"
 				>
 			</label>
 		</div>
 		<%- include("includes/scripts") %>
 		<script>
-			// async function handleChange() {
-			// 	const rootEl = document.querySelector(":root")
-			// 	const rootElStyle = getComputedStyle(rootEl)
-			// 	const cssColPrimary = rootElStyle.getPropertyValue("--col-primary")
-			// 	rootEl.style.setProperty("--col-primary", `oklch(from ${cssColPrimary} l c ${event.target.value})`)
-			// 	// const jsonHeaders = new Headers()
-			// 	// jsonHeaders.append("Content-Type", "application/json")
-			// 	// const response = await fetch("/change-hue", {
-			// 	// 	method: "POST",
-			// 	// 	body: JSON.stringify({ newHue: event.target.value }),
-			// 	// 	header: jsonHeaders,
-			// 	// })
-			// }
-
-			function handleChange() {
+			function handleInput() {
 				const rootEl = document.querySelector(":root")
 				const rootElStyle = getComputedStyle(rootEl)
 				const cssColPrimary = rootElStyle.getPropertyValue("--col-primary")
 				rootEl.style.setProperty("--col-primary", `oklch(from ${cssColPrimary} l c ${event.target.value})`)
-
+			}
+			
+			async function handleChange() {
 				document.cookie = `hue=${event.target.value}`
+
+				const response = await fetch("/change-hue", {
+					method: "POST",
+					body: JSON.stringify({ newHue: parseInt(event.target.value) }),
+					headers: {
+						"Content-Type": "application/json"
+					},
+				})
 			}
 		</script>
 	</body>
