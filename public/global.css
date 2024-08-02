@@ -35,13 +35,15 @@
 	--transition-slow: 0.5s;
 	--transition-quick: 0.125s;
 	
+	
 	font-size: 62.5%;
 	color: var(--col-dark);
 	font-family: sans-serif;
 	padding: var(--xl);
 	min-height: 100vh;
 	line-height: 1.25;
-	accent-color: var(--col-interactive);
+	accent-color: var(--col-interactive);	
+
 
 	@media (width < 600px) {
 		--text-lg: 2rem;
@@ -53,6 +55,7 @@
 }
 
 body {
+	font-family: "Poppins", sans-serif;
 	font-size: var(--text-md);
 }
 

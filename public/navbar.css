@@ -8,7 +8,7 @@
 		display: block;
 	}
 	a {
-		/* font-weight: 600; */
+		font-weight: 600;
 		&:not([href]) {
 			color: var(--col-gray);
 		}
