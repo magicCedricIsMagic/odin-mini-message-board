@@ -1,11 +1,17 @@
 .navbar {
+	container: navbar / inline-size;
+	
 	ul {
 		display: flex;
-		gap: var(--md);
+		flex-wrap: wrap;
+		gap: var(--sm) var(--md);
 		padding: unset;
 	}
 	li {
 		display: block;
+		@container navbar (width < 400px) {
+			width: min-content;
+		}
 	}
 	a {
 		font-weight: 600;

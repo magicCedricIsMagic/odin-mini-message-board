@@ -22,10 +22,10 @@
 	--xl: 7.5rem;
 	--xxl: 10rem;
 
-	--text-xxs: 1rem;
-	--text-xs: 1.2rem;
-	--text-sm: 1.4rem;
-	--text-md: 1.8rem;
+	--text-xxs: max(10rem, 10px);
+	--text-xs: max(1.2rem, 12px);
+	--text-sm: max(1.4rem, 14px);
+	--text-md: max(1.8rem, 18px);
 	--text-lg: 2.4rem;
 	--text-xl: 3rem;
 	--text-xxl: 6rem;
@@ -42,15 +42,19 @@
 	font-family: sans-serif;
 	padding: var(--xl);
 	min-height: 100vh;
-	line-height: 1.25;
+	line-height: 1.15;
 	accent-color: var(--col-interactive);	
 
-
-	@media (width < 600px) {
-		--text-lg: 2rem;
+	@media (width < 800px) {
+		/* --text-lg: 2rem;
 		--text-xl: 2.4rem;
-		--text-xxl: 4rem;
+		--text-xxl: 4rem; */
+		font-size: 54.68%;
+		padding: var(--lg);
+	}
 
+	@media (width < 500px) {
+		font-size: 46.87%;
 		padding: var(--md);
 	}
 }
