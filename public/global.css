@@ -1,9 +1,17 @@
 :root {
-	--col-primary: oklch(from royalblue l c calc(h - 30));
-	--col-danger: oklch(from var(--col-primary) l c 25);
-	--col-dark: oklch(from var(--col-primary) 30% 15% h);
-	--col-gray: color-mix(in srgb, var(--col-dark), white);
+	/* --col-primary: oklch(55% 55% 230); */
+	--col-danger: oklch(
+		from var(--col-interactive) 
+		l c calc(clamp(20, h - 180, 40))
+	);
+	
+	--col-dark: oklch(from var(--col-primary) 35% 15% h);
+	--col-gray: color-mix(in srgb, var(--col-dark) 40%, white);
 	--col-light: color-mix(in srgb, var(--col-dark) 7.5%, white);
+	--col-interactive: oklch(
+		from var(--col-primary) 
+		55% 55% h
+	);
 
 	--xxs: 0.5rem;
 	--xs: 1rem;
@@ -33,6 +41,7 @@
 	padding: var(--xl);
 	min-height: 100vh;
 	line-height: 1.25;
+	accent-color: var(--col-interactive);
 
 	@media (width < 600px) {
 		--text-lg: 2rem;
@@ -67,6 +76,7 @@ h1, h2, h3, h4, h5, h6, p, ul {
 a {
 	color: unset;
 	text-decoration: unset;
+	outline-offset: 0;
 }
 
 .flex {

@@ -23,38 +23,42 @@ let messages = [
 	},
 ]
 
-const getView = (req, res, next, routes, route) => {		
-	res.render(route.file, {
-		title: route.title,
-		links: routes,
+const getView = (req, res, next, params) => {		
+	res.render(params.route.file, {
+		title: params.route.title,
+		links: params.routes,
+		cookieHueValue: params.cookieHueValue,
 	})
 }
 
-const getAllMessages = (req, res, next, routes, route) => {	
-	res.render(route.file, {
-		title: route.title,
-		links: routes,
+const getAllMessages = (req, res, next, params) => {	
+	res.render(params.route.file, {
+		title: params.route.title,
+		links: params.routes,
 		messages: messages,
+		cookieHueValue: params.cookieHueValue,
 	})
 }
 
-const getNewMessageView = (req, res, next, routes, route) => {
+const getNewMessageView = (req, res, next, params) => {
 	res.render("new-message", {
-		title: route.title,
-		links: routes,
-		message: false
+		title: params.route.title,
+		links: params.routes,
+		message: false,
+		cookieHueValue: params.cookieHueValue,
 	})
 }
-const getEditMessageView = (req, res, next, routes) => {
+const getEditMessageView = (req, res, next, params) => {
 	res.render("new-message", {
 		title: "Modifier le message",
-		links: routes,
+		links: params.routes,
 		message: messages.find((msg) => msg.id === parseInt(req.params.id)),
 		messages: messages,
+		cookieHueValue: params.cookieHueValue,
 	})
 }
 
-const getMessageByIndex = (req, res, next, routes) => {
+const getMessageByIndex = (req, res, next, params) => {
 	const messageIndex = messages[req.params.index - 1]
 
 	if (!messageIndex) throw new CustomError(
@@ -64,16 +68,17 @@ const getMessageByIndex = (req, res, next, routes) => {
 
 	res.render("message", {
 		title: `Message n°${req.params.index}\u00a0:`,
-		links: routes,
+		links: params.routes,
 		message: messageIndex,
+		cookieHueValue: params.cookieHueValue,
 	})
 }
 
 const validateMessage = [
 	body("name")
-		.isLength({ min: 1, max: 20 }).withMessage(`Name must be between 1 and 20 characters`),
+		.isLength({ min: 1, max: 30 }).withMessage(`Nom doit être entre 1 et 30 caractères`),
   body("text")
-    .isLength({ min: 3, max: 100 }).withMessage(`Text must be between 3 and 100 characters`),
+    .isLength({ min: 3, max: 300 }).withMessage(`Texte doit être entre 1 et 300 caractères`),
 ]
 
 const addNewMessage = [
@@ -123,15 +128,25 @@ const deleteMessage = (req, res, next) => {
 	messages = messages.filter(
 		(message) => message.id !== parseInt(req.params.id),
 	)
-	next()
 }
 
-const getErrorView = (err, req, res, next, routes) => {
+const getErrorView = (err, req, res, next, params) => {
 	res.render("error", {
 		title: `Erreur ${err.statusCode}`,
-		links: routes,
+		links: params.routes,
 		error: err,
+		cookieHueValue: params.cookieHueValue,
 	})
 }
 
-module.exports = { messages, getView, getAllMessages, getMessageByIndex, getNewMessageView, getEditMessageView, addNewMessage, deleteMessage, getErrorView }
+module.exports = {
+	messages,
+	getView,
+	getAllMessages,
+	getMessageByIndex,
+	getNewMessageView,
+	getEditMessageView,
+	addNewMessage,
+	deleteMessage,
+	getErrorView,
+}

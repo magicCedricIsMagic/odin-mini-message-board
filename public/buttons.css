@@ -1,6 +1,6 @@
 
 .button {
-	--btn-col: var(--col-primary);
+	--btn-col: var(--col-interactive);
 	--btn-col-hover: oklch(from var(--btn-col) calc(l * 0.75) calc(c * 1.25) h);
 	--text-col: white;
 	

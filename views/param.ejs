@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<%- include("includes/headContent") %>
+	</head>
+	<body>
+		<%- include("includes/navbar") %>
+		<%- include("includes/spacer") %>
+		<h1><%= title %></h1>
+		<%- include("includes/spacer", { size: "md" }) %>
+
+		<div class="form">
+			<label class="form-field">
+				<span class="form-field__label">Couleur du site</span>
+				<input
+					type="range"
+					id="input-site-color"
+					name="site-color"
+					class="form-field__input"
+					value="<%= cookieHueValue %>"
+					min="0" 
+					max="360"
+					step="10" 
+					oninput="handleChange()"
+				>
+			</label>
+		</div>
+		<%- include("includes/scripts") %>
+		<script>
+			// async function handleChange() {
+			// 	const rootEl = document.querySelector(":root")
+			// 	const rootElStyle = getComputedStyle(rootEl)
+			// 	const cssColPrimary = rootElStyle.getPropertyValue("--col-primary")
+			// 	rootEl.style.setProperty("--col-primary", `oklch(from ${cssColPrimary} l c ${event.target.value})`)
+			// 	// const jsonHeaders = new Headers()
+			// 	// jsonHeaders.append("Content-Type", "application/json")
+			// 	// const response = await fetch("/change-hue", {
+			// 	// 	method: "POST",
+			// 	// 	body: JSON.stringify({ newHue: event.target.value }),
+			// 	// 	header: jsonHeaders,
+			// 	// })
+			// }
+
+			function handleChange() {
+				const rootEl = document.querySelector(":root")
+				const rootElStyle = getComputedStyle(rootEl)
+				const cssColPrimary = rootElStyle.getPropertyValue("--col-primary")
+				rootEl.style.setProperty("--col-primary", `oklch(from ${cssColPrimary} l c ${event.target.value})`)
+
+				document.cookie = `hue=${event.target.value}`
+			}
+		</script>
+	</body>
+</html>
