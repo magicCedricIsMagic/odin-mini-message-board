@@ -76,9 +76,11 @@ const getMessageByIndex = (req, res, next, params) => {
 
 const validateMessage = [
 	body("name")
-		.isLength({ min: 1, max: 30 }).withMessage(`Nom doit être entre 1 et 30 caractères`),
+		.isLength({ min: 1, max: 30 })
+		.withMessage(`Nom doit être entre 1 et 30 caractères`),
 	body("text")
-		.isLength({ min: 3, max: 300 }).withMessage(`Texte doit être entre 1 et 300 caractères`),
+		.isLength({ min: 3, max: 300 })
+		.withMessage(`Texte doit être entre 1 et 300 caractères`),
 ]
 
 const addNewMessage = [

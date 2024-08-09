@@ -31,12 +31,16 @@
 					<span class="form-field__label">Mode des ténèbres</span>	
 					<input
 						type="checkbox"
+						hidden
 						id="input-dark-mode"
 						class="form-field__input form-field__input--switch"
 						onchange="handleChangeDarkMode()"
 						<% if (theme.darkMode) { %> checked <% } %>
 					>
-					<div class="form-field__switch"></div>
+					<button
+						onclick="this.previousElementSibling.click()"
+						class="form-field__switch"
+					></button>
 				</label>
 			</div>
 		</div>
