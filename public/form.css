@@ -44,10 +44,14 @@ textarea {
 		outline-color: rgb(from var(--col-dark) r g b / 10%);
 	}
 	&[type="range"] {
-		padding: 0;
-		margin-block-start: var(--xxs);
+		cursor: grab;
+		padding-inline: 0;
+		margin-block-end: calc(var(--xxs) * -1);
 		transition: none;
 		min-height: 0;
+		&:active {
+			cursor: grabbing;
+		}
 	}
 }
 .form-field__input--switch {
@@ -55,6 +59,7 @@ textarea {
 }
 
 .form-field__switch {
+	cursor: pointer;
 	margin-block-start: var(--xxs);
 	width: var(--lg);
 	padding: var(--xxxs);
