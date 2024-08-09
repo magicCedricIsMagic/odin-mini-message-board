@@ -27,7 +27,7 @@
 		--col-gray: oklch(from var(--base-col-gray) 60% c h);
 		--col-light: oklch(from var(--base-col-dark) 22.5% 5% h);
 		--col-interactive: oklch(from var(--base-col-interactive) 90% c h);
-		--col-background: oklch(from var(--base-col-dark) 15% 2.5% h);
+		--col-background: oklch(from var(--base-col-dark) 17.5% 2.5% h);
 	}
 
 	--xxxs: 0.5rem;
