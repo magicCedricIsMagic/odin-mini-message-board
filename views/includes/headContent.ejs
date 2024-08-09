@@ -16,10 +16,10 @@
 
 <%
 	let dangerHue
-	if (cookieHue >= 360 || cookieHue < 30) { // rouges-roses
+	if (theme.hue >= 360 || theme.hue < 30) { // rouges-roses
 		dangerHue = 60
 	}
-	else if (cookieHue < 60) { // rouges-oranges
+	else if (theme.hue < 60) { // rouges-oranges
 		dangerHue = 0
 	}
 	else {
@@ -29,7 +29,7 @@
 <style>
 
 	:root {
-		--col-primary: oklch(45% 45% <%= cookieHue %>);
-		--col-danger: oklch(55% 55% <%= dangerHue %>);
+		--base-col-primary: oklch(42.5% 42.5% <%= theme.hue %>);
+		--base-col-danger: oklch(55% 55% <%= dangerHue %>);
 	}
 </style>

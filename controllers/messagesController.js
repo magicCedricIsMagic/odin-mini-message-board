@@ -27,7 +27,7 @@ const getView = (req, res, next, params) => {
 	res.render(params.route.file, {
 		title: params.route.title,
 		links: params.routes,
-		cookieHue: params.cookieHue,
+		theme: params.theme,
 	})
 }
 
@@ -36,7 +36,7 @@ const getAllMessages = (req, res, next, params) => {
 		title: params.route.title,
 		links: params.routes,
 		messages: messages,
-		cookieHue: params.cookieHue,
+		theme: params.theme,
 	})
 }
 
@@ -45,7 +45,7 @@ const getNewMessageView = (req, res, next, params) => {
 		title: params.route.title,
 		links: params.routes,
 		message: false,
-		cookieHue: params.cookieHue,
+		theme: params.theme,
 	})
 }
 const getEditMessageView = (req, res, next, params) => {
@@ -54,7 +54,7 @@ const getEditMessageView = (req, res, next, params) => {
 		links: params.routes,
 		message: messages.find((msg) => msg.id === parseInt(req.params.id)),
 		messages: messages,
-		cookieHue: params.cookieHue,
+		theme: params.theme,
 	})
 }
 
@@ -70,7 +70,7 @@ const getMessageByIndex = (req, res, next, params) => {
 		title: `Message n°${req.params.index}\u00a0:`,
 		links: params.routes,
 		message: messageIndex,
-		cookieHue: params.cookieHue,
+		theme: params.theme,
 	})
 }
 
@@ -135,7 +135,7 @@ const getErrorView = (err, req, res, next, params) => {
 		title: `Erreur ${err.statusCode}`,
 		links: params.routes,
 		error: err,
-		cookieHue: params.cookieHue,
+		theme: params.theme,
 	})
 }
 

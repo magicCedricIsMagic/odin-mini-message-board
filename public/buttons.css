@@ -1,17 +1,24 @@
+:root.dark-theme {
+	.button {
+		--btn-col-hover: oklch(from var(--btn-col) calc(l * 0.8) c h);
+	}
+}
 
 .button {
 	--btn-col: var(--col-interactive);
 	--btn-col-hover: oklch(from var(--btn-col) calc(l * 0.75) calc(c * 1.25) h);
-	--text-col: white;
+	--text-col: var(--col-background);
 	
-	display: block;
-	line-height: var(--line-height);
+	display: grid;
+	place-items: center;
+	line-height: var(--line-height-sm);
 	width: fit-content;
+	min-height: var(--interactive-min-height);
 
 	color: var(--text-col);
 	background-color: var(--btn-col);
-	padding: var(--xs) var(--sm);
-	border-radius: var(--xs);
+	padding: var(--xs) var(--md);
+	border-radius: var(--interactive-border-radius);
 	border: 1px solid var(--btn-col);
 	cursor: pointer;
 	outline: 3px solid transparent;
@@ -30,5 +37,8 @@
 	&.sm {
 		font-size: var(--text-sm);
 		padding: var(--xxs) var(--xs);
+	}
+	@media (width < 800px) {
+		padding-inline: var(--sm);
 	}
 }

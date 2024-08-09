@@ -6,15 +6,32 @@
 	); */
 	/* --col-danger: oklch(from var(--col-interactive) l c 25); */
 	
-	--col-dark: oklch(from var(--col-primary) 35% 15% h);
-	--col-gray: color-mix(in srgb, var(--col-dark) 40%, white);
-	--col-light: color-mix(in srgb, var(--col-dark) 7.5%, white);
-	--col-interactive: oklch(
-		from var(--col-primary) 
-		55% 55% h
-	);
+	--base-col-dark: oklch(from var(--col-primary) 35% 20% h);
+	--base-col-gray: color-mix(in srgb, var(--col-dark) 40%, white);
+	--base-col-light: color-mix(in srgb, var(--col-dark) 7.5%, white);
+	--base-col-interactive: oklch(from var(--col-primary) 50% 75% h);
+	--base-col-background: white;
+	
+	--col-primary: var(--base-col-primary);
+	--col-danger: var(--base-col-danger);
+	--col-dark: var(--base-col-dark);
+	--col-gray: var(--base-col-gray);
+	--col-light: var(--base-col-light);
+	--col-interactive: var(--base-col-interactive);
+	--col-background: var(--base-col-background);
 
-	--xxs: 0.5rem;
+	&.dark-theme {
+		--col-primary: oklch(from var(--base-col-primary) 100% 0% h);
+		--col-danger: oklch(from var(--base-col-danger) 75% 65% h);
+		--col-dark: oklch(from var(--base-col-primary) 85% 10% h);
+		--col-gray: oklch(from var(--base-col-gray) 60% c h);
+		--col-light: oklch(from var(--base-col-dark) 20% 5% h);
+		--col-interactive: oklch(from var(--base-col-interactive) 90% c h);
+		--col-background: oklch(from var(--base-col-dark) 15% 2.5% h);
+	}
+
+	--xxxs: 0.5rem;
+	--xxs: 0.75rem;
 	--xs: 1rem;
 	--sm: 2rem;
 	--md: 3rem;
@@ -30,6 +47,12 @@
 	--text-xl: 3rem;
 	--text-xxl: 6rem;
 
+	--interactive-border-radius: var(--xs);
+	--interactive-min-height: 4.4rem;
+
+	--line-height: 1.5;
+	--line-height-sm: 1.16;
+
 	--screen-width-xs: 600px;
 
 	--transition: 0.25s;
@@ -39,10 +62,11 @@
 	
 	font-size: 62.5%;
 	color: var(--col-dark);
+	background-color: var(--col-background);
 	font-family: sans-serif;
 	padding: var(--xl);
 	min-height: 100vh;
-	line-height: 1.15;
+	line-height: var(--line-height);
 	accent-color: var(--col-interactive);	
 
 	@media (width < 800px) {
@@ -75,6 +99,10 @@ h2 {
 
 h3 {
 	font-size: var(--text-lg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: var(--line-height-sm);
 }
 
 h1, h2, h3, h4, h5, h6, p, ul {

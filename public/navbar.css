@@ -9,6 +9,7 @@
 	}
 	li {
 		display: block;
+		line-height: var(--line-height-sm);
 		@container navbar (width < 400px) {
 			width: min-content;
 		}

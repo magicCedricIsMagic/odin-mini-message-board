@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="<%= theme.darkMode ? "dark-theme" : "" %>">
 	<head>
 		<%- include("includes/headContent") %>
 	</head>
@@ -7,34 +7,61 @@
 		<%- include("includes/navbar") %>
 		<h1><%= title %></h1>
 		<%- include("includes/spacer", { size: "md" }) %>
-
-		<div class="form">
-			<label class="form-field">
-				<span class="form-field__label">Couleur du site</span>
-				<input
-					type="range"
-					id="input-site-color"
-					name="site-color"
-					class="form-field__input"
-					value="<%= cookieHue %>"
-					min="0" 
-					max="360"
-					step="10" 
-					onchange="handleChange()"
-					oninput="handleInput()"
-				>
-			</label>
+		
+		<div class="flex column">
+			<div class="form">
+				<label class="form-field">
+					<span class="form-field__label">Couleur du site</span>
+					<input
+						type="range"
+						id="input-site-color"
+						name="site-color"
+						class="form-field__input"
+						value="<%= theme.hue %>"
+						min="0" 
+						max="360"
+						step="10" 
+						onchange="handleChangeHue()"
+						oninput="handleInputHue()"
+					>
+				</label>
+			</div>
+			<div class="form">
+				<label class="form-field">
+					<span class="form-field__label">Mode des ténèbres</span>	
+					<input
+						type="checkbox"
+						id="input-dark-mode"
+						class="form-field__input form-field__input--switch"
+						onchange="handleChangeDarkMode()"
+						<% if (theme.darkMode) { %> checked <% } %>
+					>
+					<div class="form-field__switch"></div>
+				</label>
+			</div>
 		</div>
 		<%- include("includes/scripts") %>
 		<script>
 			const rootEl = document.querySelector(":root")
 			const rootElStyle = getComputedStyle(rootEl)
-			const cssColPrimary = rootElStyle.getPropertyValue("--col-primary")
-			function handleInput() {
-				rootEl.style.setProperty("--col-primary", `oklch(from ${cssColPrimary} l c ${event.target.value})`)
+			const cssColPrimary = rootElStyle.getPropertyValue("--base-col-primary")
+
+			function handleChangeDarkMode() {
+				document.cookie = `darkMode=${event.target.checked}`
+				// console.log("document.cookie", document.cookie)
+				if (event.target.checked) {
+					rootEl.classList.add("dark-theme")
+				}
+				else {
+					rootEl.classList.remove("dark-theme")
+				}
+			}
+
+			function handleInputHue() {
+				rootEl.style.setProperty("--base-col-primary", `oklch(from ${cssColPrimary} l c ${event.target.value})`)
 			}
 			
-			async function handleChange() {
+			async function handleChangeHue() {
 				document.cookie = `hue=${event.target.value}`
 
 				try {
@@ -50,7 +77,8 @@
 					// }
 					response = await response.json()
     			console.log("response", response)
-				} catch (error) { console.log("Oups\u00a0:", error) }				
+				}
+				catch (error) { console.log("Oups\u00a0:", error) }				
 			}
 		</script>
 	</body>
