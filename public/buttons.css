@@ -36,7 +36,8 @@
 	}
 	&.sm {
 		font-size: var(--text-sm);
-		padding: var(--xxs) var(--xs);
+		min-height: 0;
+		padding: var(--xxs) var(--sm);
 	}
 	@media (width < 800px) {
 		padding-inline: var(--sm);
