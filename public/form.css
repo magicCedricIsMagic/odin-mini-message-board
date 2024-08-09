@@ -30,6 +30,11 @@ textarea {
 
 .form-field__label {
 	line-height: var(--line-height-sm);
+	&:has(~ .form-field__input[required]):after {
+		content: "*";
+		color: var(--col-danger);
+		margin-inline-start: var(--xxxs);
+	}
 }
 
 .form-field__input {
