@@ -6,28 +6,28 @@
 	); */
 	/* --col-danger: oklch(from var(--col-interactive) l c 25); */
 	
+	--base-col-interactive: oklch(from var(--col-primary) 50% 75% h);
 	--base-col-dark: oklch(from var(--col-primary) 35% 20% h);
 	--base-col-gray: color-mix(in srgb, var(--col-dark) 40%, white);
-	--base-col-light: color-mix(in srgb, var(--col-dark) 7.5%, white);
-	--base-col-interactive: oklch(from var(--col-primary) 50% 75% h);
+	--base-col-light: color-mix(in srgb, var(--col-dark) 8%, white);
 	--base-col-background: white;
 	
 	--col-primary: var(--base-col-primary);
+	--col-interactive: var(--base-col-interactive);
 	--col-danger: var(--base-col-danger);
 	--col-dark: var(--base-col-dark);
 	--col-gray: var(--base-col-gray);
 	--col-light: var(--base-col-light);
-	--col-interactive: var(--base-col-interactive);
 	--col-background: var(--base-col-background);
 
 	&.dark-theme {
-		--col-primary: oklch(from var(--base-col-primary) 100% 0% h);
+		--col-primary: oklch(from var(--base-col-primary) 90% 15% h);
+		--col-interactive: oklch(from var(--base-col-interactive) 90% 55% h);
 		--col-danger: oklch(from var(--base-col-danger) 75% 65% h);
-		--col-dark: oklch(from var(--base-col-primary) 85% 10% h);
+		--col-dark: oklch(from var(--base-col-primary) 100% 5% h);
 		--col-gray: oklch(from var(--base-col-gray) 60% c h);
-		--col-light: oklch(from var(--base-col-dark) 22.5% 5% h);
-		--col-interactive: oklch(from var(--base-col-interactive) 90% c h);
-		--col-background: oklch(from var(--base-col-dark) 17.5% 2.5% h);
+		--col-light: oklch(from var(--base-col-dark) 18.5% 3.5% h);
+		--col-background: oklch(from var(--base-col-dark) 12.55% 3.5% h);
 	}
 
 	--xxxs: 0.5rem;
