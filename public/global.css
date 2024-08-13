@@ -26,8 +26,8 @@
 		--col-danger: oklch(from var(--base-col-danger) 75% 65% h);
 		--col-dark: oklch(from var(--base-col-primary) 100% 5% h);
 		--col-gray: oklch(from var(--base-col-gray) 60% c h);
-		--col-light: oklch(from var(--base-col-dark) 19% 3.5% h);
-		--col-background: oklch(from var(--base-col-dark) 12% 3.5% h);
+		--col-light: oklch(from var(--base-col-dark) 25% 3.5% h);
+		--col-background: oklch(from var(--base-col-dark) 15% 3.5% h);
 	}
 
 	--xxxs: 0.5rem;
