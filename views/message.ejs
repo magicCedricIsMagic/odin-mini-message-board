@@ -18,11 +18,40 @@
 			<%- include("includes/spacer", { size: "lg" }) %>
 			<div class="flex wrap gap-sm">
 				<a href="/edit-message/<%= message.id %>" class="button primary">Modifier</a>
-				<form method="POST" action="/delete-message/<%= message.id %>">
-					<button type="submit" class="button danger">Supprimer</button>
-				</form>
+				<button class="button danger" onclick="openDeleteModal()">
+					Supprimer
+				</button>
+
 			</div>
 		</article>
+		
+		<dialog id="delete-modal" class="modal">
+			<h3>Êtes-vous sûr de vouloir supprimer ce message&nbsp;?</h3>
+			<%- include("includes/spacer", { size: "sm" }) %>
+			<p>La suppression sera définitive.</p>
+			<%- include("includes/spacer", { size: "lg" }) %>
+			<div class="flex gap-sm justify-end align-center">
+				<button class="button gray" onclick="closeDeleteModal()">Annuler</button>
+				<form method="POST" action="/delete-message/<%= message.id %>">
+					<button type="submit" class="button danger" onclick="closeDeleteModal()">Supprimer</button>
+				</form>
+			</div>
+		</dialog>
+
+		<script>
+			const deleteModal = document.querySelector("#delete-modal")
+			function openDeleteModal() {
+				deleteModal.showModal()
+			}
+			function closeDeleteModal() {
+				deleteModal.classList.add("is-closing")
+				setTimeout(() => {
+					deleteModal.classList.remove("is-closing")
+					deleteModal.close()
+				}, 500)
+			}
+		</script>
+
 		<%- include("includes/scripts") %>
 	</body>
 </html>

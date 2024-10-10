@@ -34,8 +34,15 @@
 	&:focus-visible {
 		outline-color: rgb(from var(--btn-col-hover) r g b / 30%);
 	}
+	&.gray {
+		--text-col: var(--col-dark);
+		/* --btn-col: color-mix(in srgb, var(--col-background) 50%, var(--col-gray)); */
+		--btn-col: color-mix(in srgb, var(--col-light) 70%, var(--col-gray));
+		--btn-col-hover: color-mix(in srgb, var(--col-light) 40%, var(--col-gray));
+	}
 	&.danger {
 		--btn-col: var(--col-danger);
+		--btn-col-hover: color-mix(in srgb, var(--col-dark) 33%, var(--col-danger));
 	}
 	&.sm {
 		font-size: var(--text-sm);

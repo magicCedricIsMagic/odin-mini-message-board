@@ -6,10 +6,10 @@
 	); */
 	/* --col-danger: oklch(from var(--col-interactive) l c 25); */
 	
-	--base-col-interactive: oklch(from var(--col-primary) 50% 75% h);
+	--base-col-interactive: oklch(from var(--col-primary) 50% 85% h);
 	--base-col-dark: oklch(from var(--col-primary) 35% 20% h);
 	--base-col-gray: color-mix(in srgb, var(--col-dark) 40%, white);
-	--base-col-light: color-mix(in srgb, var(--col-dark) 8%, white);
+	--base-col-light: color-mix(in srgb, var(--col-dark) 10%, white);
 	--base-col-background: white;
 	
 	--col-primary: var(--base-col-primary);
@@ -19,7 +19,7 @@
 	--col-gray: var(--base-col-gray);
 	--col-light: var(--base-col-light);
 	--col-background: var(--base-col-background);
-
+	
 	&.dark-theme {
 		--col-primary: oklch(from var(--base-col-primary) 90% 15% h);
 		--col-interactive: oklch(from var(--base-col-interactive) 90% 55% h);
@@ -29,6 +29,9 @@
 		--col-light: oklch(from var(--base-col-dark) 25% 3.5% h);
 		--col-background: oklch(from var(--base-col-dark) 15% 3.5% h);
 	}
+
+	--col-white: white;
+	--col-black: black;
 
 	--xxxs: 0.5rem;
 	--xxs: 0.75rem;
