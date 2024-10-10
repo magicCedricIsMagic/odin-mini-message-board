@@ -1,12 +1,14 @@
-:root.dark-theme {
+/* :root.dark-theme {
 	.button {
 		--btn-col-hover: oklch(from var(--btn-col) calc(l * 0.8) c h);
 	}
-}
+} */
 
 .button {
-	--btn-col: var(--col-interactive);
-	--btn-col-hover: oklch(from var(--btn-col) calc(l * 0.75) calc(c * 1.25) h);
+	/* --btn-col: var(--col-interactive); */
+	/* --btn-col-hover: oklch(from var(--btn-col) calc(l * 0.75) calc(c * 1.25) h); */
+	--btn-col: color-mix(in srgb, var(--col-background) 15%, var(--col-interactive));
+	--btn-col-hover: color-mix(in srgb, var(--col-dark), var(--col-interactive));
 	--text-col: var(--col-background);
 	
 	display: grid;
@@ -20,6 +22,7 @@
 	padding: var(--xs) var(--md);
 	border-radius: var(--interactive-border-radius);
 	border: 1px solid var(--btn-col);
+	font-weight: 500;
 	cursor: pointer;
 	outline: 3px solid transparent;
 	transition: var(--transition);

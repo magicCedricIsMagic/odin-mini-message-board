@@ -17,7 +17,7 @@
 					%>Vous avez un message&nbsp;:<%
 					break
 				default:
-					%>Vous avez des messages&nbsp;:<%
+					%>Vous avez <%= messages.length %> messages&nbsp;:<%
 			} %>
 		</h2>
 		<%- include("includes/spacer") %>
@@ -32,6 +32,9 @@
 				<p class="text"><%= message.text %></p>
 			</a>
 			<% } %>
+			<a class="message new" href="/new">
+				<p class="text">Nouveau<br/>message</p>
+			</a>
 		</section>
 		<%- include("includes/scripts") %>
 	</body>

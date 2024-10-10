@@ -12,7 +12,21 @@
 	padding: var(--md) var(--lg);
 	background-color: var(--col-light);
 	border-radius: var(--sm);
-	
+
+	&.new {
+		display: grid;
+		color: var(--col-background);
+		background-color: color-mix(in srgb, var(--col-background) 15%, var(--col-interactive));
+		place-items: center;
+
+		.text {
+			font-weight: 500;
+			/* font-size: var(--text-md); */
+			text-align: center;
+			line-height: var(--line-height-sm);
+		}
+	}
+
 	.name,
 	.date {
 		opacity: 0.75;
@@ -69,6 +83,11 @@
 			.name,
 			.date {
 				color: color-mix(in srgb, var(--col-dark) 40%, var(--col-interactive));
+			}
+
+			&.new {
+				color: var(--col-background);
+				background-color: color-mix(in srgb, var(--col-dark), var(--col-interactive));
 			}
 		}
 	}
