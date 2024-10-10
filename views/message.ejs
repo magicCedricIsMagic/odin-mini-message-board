@@ -9,7 +9,7 @@
 		<h1><%= title %></h1>
 		<%- include("includes/spacer") %>
 		<article class="message big">
-			<p class="user">Envoyé par <strong><%= message.user %></strong></p>
+			<p class="name">Envoyé par <strong><%= message.name %></strong></p>
 			<p class="date">
 				le <strong><%= displayDate(message.added) %></strong> à
 				<strong><%= displayHour(message.added) %></strong>

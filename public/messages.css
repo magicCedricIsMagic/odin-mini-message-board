@@ -13,7 +13,7 @@
 	background-color: var(--col-light);
 	border-radius: var(--sm);
 	
-	.user,
+	.name,
 	.date {
 		opacity: 0.75;
 		color: color-mix(in srgb, var(--col-dark), var(--col-primary));
@@ -32,7 +32,7 @@
 		padding: var(--lg) var(--xl);
 		border-radius: var(--md);
 		max-width: 50rem;
-		.user,
+		.name,
 		.date {
 			font-size: var(--text-md);
 		}
@@ -66,7 +66,7 @@
 			background-color: color-mix(in srgb, var(--col-light) 92.5%, var(--col-interactive));
 			transition: var(--transition-quick);
 
-			.user,
+			.name,
 			.date {
 				color: color-mix(in srgb, var(--col-dark) 40%, var(--col-interactive));
 			}

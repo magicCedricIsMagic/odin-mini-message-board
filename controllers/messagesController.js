@@ -1,29 +1,9 @@
 const { body, validationResult } = require("express-validator");
 const { sanitize } = require("../utils/texts")
 const CustomError = require("../utils/CustomError")
+const db = require("../db/queries")
 
-let messages = [
-	{
-		id: 1,
-		text: "Bonjour ici\u00a0!",
-		user: "Jacqueline",
-		added: new Date().addHours(-1).addMinutes(-2),
-	},
-	{
-		id: 2,
-		text: "Allo le monde\u00a0?",
-		user: "Jean-Michel",
-		added: new Date().addMinutes(-31),
-	},
-	{
-		id: 3,
-		text: "Oui ?",
-		user: "Le monde",
-		added: new Date(),
-	},
-]
-
-const getView = (req, res, next, params) => {
+function getView(req, res, next, params) {
 	res.render(params.route.file, {
 		title: params.route.title,
 		links: params.routes,
@@ -31,7 +11,8 @@ const getView = (req, res, next, params) => {
 	})
 }
 
-const getAllMessages = (req, res, next, params) => {
+async function getAllMessages(req, res, next, params) {
+	const messages = await db.getAllMessages()
 	res.render(params.route.file, {
 		title: params.route.title,
 		links: params.routes,
@@ -40,7 +21,7 @@ const getAllMessages = (req, res, next, params) => {
 	})
 }
 
-const getNewMessageView = (req, res, next, params) => {
+function getNewMessageView(req, res, next, params) {
 	res.render("new-message", {
 		title: params.route.title,
 		links: params.routes,
@@ -48,30 +29,28 @@ const getNewMessageView = (req, res, next, params) => {
 		theme: params.theme,
 	})
 }
-const getEditMessageView = (req, res, next, params) => {
+async function getEditMessageView(req, res, next, params) {
+	const message = await db.getMessage(parseInt(req.params.id))
+	console.log("getEditMessageView", message)
 	res.render("new-message", {
 		title: "Modifier le message",
 		links: params.routes,
-		message: messages.find((msg) => msg.id === parseInt(req.params.id)),
-		messages: messages,
+		message: message,
 		theme: params.theme,
 	})
 }
 
-const getMessageByIndex = (req, res, next, params) => {
-	const messageIndex = messages[req.params.index - 1]
-
-	if (!messageIndex) throw new CustomError(
-		"Page non trouvée",
-		"Cette page n'existe pas."
-	)
-
-	res.render("message", {
-		title: `Message n°${req.params.index}\u00a0:`,
-		links: params.routes,
-		message: messageIndex,
-		theme: params.theme,
-	})
+async function getMessageByIndex(req, res, next, params) {
+	const message = await db.getMessageByIndex(parseInt(req.params.index - 1))
+	if (message) {
+		res.render("message", {
+			title: `Message n°${req.params.index}\u00a0:`,
+			links: params.routes,
+			message: message,
+			theme: params.theme,
+		})
+	}
+	else next()
 }
 
 const validateMessage = [
@@ -99,37 +78,32 @@ const addNewMessage = [
 			)
 		}
 		else {
-			const postId = parseInt(req.params.id)
-			if (postId) {
-				messages = messages.map((message) => {
-					if (message.id === postId) {
-						return {
-							...message,
-							text: sanitize(req.body.text),
-							user: sanitize(req.body.name),
-						}
-					}
-					else return message
-				})
-			}
-			else {
-				messages.push({
-					id: messages[messages.length - 1]?.id + 1 || 1,
+			(async() => {
+				const postId = parseInt(req.params.id)
+				const message = {
 					text: sanitize(req.body.text),
-					user: sanitize(req.body.name),
-					added: new Date(),
-				})
-			}
-			res.redirect("/")
+					name: sanitize(req.body.name),
+				}
+				if (postId) {
+					message.id = postId
+					console.log("updateMessage", message)
+					await db.updateMessage(message)
+				}
+				else await db.insertMessage(message)
+				res.redirect("/")
+			})()
 		}
 	}
 ]
 
-const deleteMessage = (req, res, next) => {
+async function deleteMessage (req, res, next) {
 	res.redirect("/")
-	messages = messages.filter(
-		(message) => message.id !== parseInt(req.params.id),
-	)
+	await db.deleteMessage(req.params.id)
+}
+
+async function deleteAllMessages (req, res, next) {
+	res.redirect("/")
+	await db.deleteAllMessages()
 }
 
 const getErrorView = (err, req, res, next, params) => {
@@ -142,7 +116,6 @@ const getErrorView = (err, req, res, next, params) => {
 }
 
 module.exports = {
-	messages,
 	getView,
 	getAllMessages,
 	getMessageByIndex,
@@ -150,5 +123,6 @@ module.exports = {
 	getEditMessageView,
 	addNewMessage,
 	deleteMessage,
+	deleteAllMessages,
 	getErrorView,
 }

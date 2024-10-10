@@ -76,6 +76,7 @@ indexRouter.get("/edit-message/:id", (req, res, next) => {
 indexRouter.post("/edit-message/:id", messagesController.addNewMessage)
 
 indexRouter.post("/delete-message/:id", messagesController.deleteMessage)
+// indexRouter.get("/delete-all-messages", messagesController.deleteAllMessages)
 
 indexRouter.get("/param", (req, res, next) => {
 	messagesController.getView(req, res, next, { routes, route: routes[2], theme })
