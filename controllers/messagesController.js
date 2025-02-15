@@ -97,13 +97,13 @@ const addNewMessage = [
 ]
 
 async function deleteMessage (req, res, next) {
-	res.redirect("/")
 	await db.deleteMessage(req.params.id)
+	res.redirect("/")
 }
 
 async function deleteAllMessages (req, res, next) {
-	res.redirect("/")
 	await db.deleteAllMessages()
+	res.redirect("/")
 }
 
 const getErrorView = (err, req, res, next, params) => {
